@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang = en>
+<head>
+<title>Simple Calculator</title>
+<style type = "text/css">
+body {
+	   background-color : pink;
+	   background-position : center;
+	   background-repeat : no-repeat; 
+}
+#f1 {
+	   font-size : 30px;
+	   border : 5px solid red;
+	   width : 500px;
+	   padding : 80px;
+	   background-color : yellow;
+	   box-shadow : 20px 20px black;
+}
+h1 {
+	   color : Blue;
+}
+#out {
+	   border : 6px solid white;
+	   width : 490px;
+	   height  : 140px;
+	   background-color : white;
+	   	
+}
+input {
+		font-size : 25px;
+	   font-weight :  bold;
+	   width : 110px;
+	   height : 40px;
+}
+#out > #out1
+{
+	font-weight : bold;
+	font-size : 25px;
+	width : 480px;
+	height : 70px;
+	overflow: scroll;
+	text-align : left;
+}
+#out > #out2
+{
+	font-weight : bold;
+	border : 6px solid white;
+	margin-left : 0px;
+}
+table {
+	   margin-left : -5px;
+}
+</style>
+</head>
+<body>
+<center>
+<div id = f1>
+<h1>RAMCY</h1>
+<hr size = 6 color = black>
+<div id = out>
+<div id = out1></div> <hr>
+<output id = out2>Answer</output>
+</div>
+<br>
+<table cellpadding = 7>
+<tr>
+<td><input name = angle style = "height : 30px;width : 30px;" type = "radio" Onclick = "pick(0)" checked/>Degree</td>
+<td><input name = angle style = "height : 30px;width : 30px;" type = "radio" Onclick = "pick(1)" />Radian</td>
+<td><input name = up type = button value = "&uArr;" onclick = "past(0)" />
+<td><input name = up type = button value = "&dArr;" onclick = "past(1)" />
+</tr>
+<tr>
+<td><input id = in1 type = "button" value = "sin " onclick = "sinf()" /></td>
+<td><input id = in2 type = "button" value = "cos " onclick = "cosf()" /></td>
+<td><input id = in3 type = "button" value = "tan " onclick = "tanf()" /></td>
+<td><input id = del type = "button" value = "&#10232;" onclick = "del()" /></td>
+</tr>
+<tr>
+<td><input id = in4 type = "button" value = "cot " onclick = "cotf()" /></td>
+<td><input id = in5 type = "button" value = "sec " onclick = "secf()" /></td>
+<td><input id = in6 type = "button" value = "cosec " onclick = "cosecf()" /></td>
+<td><input id = oppro type = "button" value = * onclick = "fun(this.value)" /></td>
+</tr>
+<tr>
+<td><input id = 1 type = "button" value = 1 onclick = "fun(this.value)" /></td>
+<td><input id = 2 type = "button" value = 2 onclick = "fun(this.value)" /></td>
+<td><input id = 2 type = "button" value = 3 onclick = "fun(this.value)" /></td>
+<td><input id = oppro type = "button" value = / onclick = "fun(this.value)" /></td>
+</tr>
+<tr>
+<td><input id = 4 type = "button" value = 4 onclick = "fun(this.value)" /></td>
+<td><input id = 5 type = "button" value = 5 onclick = "fun(this.value)" /></td>
+<td><input id = 6 type = "button" value = 6 onclick = "fun(this.value)" /></td>
+<td rowspan = 2><input id = opadd type = button style = "height : 100px;" value = + onclick = "fun(this.value)" /></td>
+</tr>
+<tr>
+<td><input id = 7 type = "button" value = 7 onclick = "fun(this.value)" /></td>
+<td><input id = 8 type = "button" value = 8 onclick = "fun(this.value)" /></td>
+<td><input id = 9 type = "button" value = 9 onclick = "fun(this.value)" /></td>
+</tr>
+<tr>
+<td><input id = in7 type = "button" value = . onclick = "fun(this.value)" /></td>
+<td><input id = in8 type = "button" value = 0 onclick = "fun(this.value)" /></td>
+<td><input id = in9 type = "button" value = - onclick = "fun(this.value)" /></td>
+<td><input id = per type = "button" value = % onclick = "fun(this.value)" /></td>
+</tr>
+<tr>
+<td><input id = ac type = "button" value = AC onclick = "fun(this.value)" /></td>
+<td><input id = ans type = "button" value = Ans onclick = "retrive()" /></td>
+<td><input id = pow type = "button" value = ** onclick = "fun(this.value)" /></td>
+<td><input id = sol type = "button" value = = onclick = "fun(this.value)" /></td>
+</tr>
+</table>
+</center>
+<script type = "text/javascript">
+var p = "";
+//var track = "";
+var temp = 0;
+var num = "";
+var set = 0;
+var ans = "";
+var dup = "";
+function retrive()
+{
+	p = "";
+	dup = "";
+	p = p.concat(ans);
+	dup = p;
+ 	document.getElementById("out1").innerHTML = p;
+ 	return;
+}
+function sinf()
+{
+	 temp = 1;
+	 dup = dup.concat("sin ");
+	 document.getElementById("out1").innerHTML = dup;
+	 return;	 
+}
+function cosf()
+{
+	 temp = 2;
+	 dup = dup.concat("cos ");
+	 document.getElementById("out1").innerHTML = dup;
+	 return;	 
+}
+function tanf()
+{
+	 temp = 3;
+	 dup = dup.concat("tan ");
+	 document.getElementById("out1").innerHTML = dup;
+	 return;	 
+}
+function pick(t)
+{
+	set = Number(t);
+}
+function change(k)
+{
+	if(set == 0)
+	{
+		return (Math.PI/180) * k;
+	}
+	return k;
+}
+function del()
+{
+	var i = dup.length-1;
+	var n = p.length-1;
+	var ch;
+	 if(dup.charAt(i) == " ")
+	 {
+		  for(;;)
+		  {
+		  		i--;
+		  		ch = dup.charAt(i);
+		  		if(ch == "+" || ch == "-" || ch == "*" ||  i == -1 || ch == "**" || ch == "/" || ch == "%")
+		  			break; 	
+		  }
+		    dup = dup.substr(0,i+1);
+			document.getElementById("out1").innerHTML = dup;
+			if(dup.isEmpty())
+			{
+				p = "";
+				document.getElementById("out2").innerHTML = "Answer";
+				return;
+			}
+		  if(!p.isEmpty())
+		  {
+		  		 for(;;)
+		  	  {
+		  		n--;
+		  		ch = p.charAt(n);
+		  		if(ch == "+" || ch == "-" || ch == "*" || n == -1 || ch == "**" || ch == "/" || ch == "%")
+		  			break;	
+		  	  }
+		  	  p = p.substr(0,n+1);
+		  	  ans = eval(p);
+		  	  if(p.length == 1)
+		  	  {
+		  		   	document.getElementById("out2").innerHTML = "Answer";
+		  	  }
+	     	 else
+		  	  {
+			 	 ans = eval(p);
+		 	 	 document.getElementById("out2").innerHTML = ans; 
+		 	  }	
+		  }  
+			return;
+	 }
+	  else
+	 {
+		 dup = dup.substr(0,i);
+		 num = num.substr(0,num.length-1);
+		 document.getElementById("out1").innerHTML = dup;
+		 if(dup.length <= 0)
+		 {
+		 		p = "";
+		 		document.getElementById("out2").innerHTML = "Answer";
+		 }
+		 else
+		 {
+			  if(p.charAt(n) != " ")
+			  {
+			  	   	p = p.substr(0,n);
+			  	  if(p.length == 0)
+			  	  {
+		 		  	    	document.getElementById("out2").innerHTML = "Answer";
+		   	 	 }
+	     	 	 else
+		 		  {
+			 	 	 ans = eval(p);
+			  	  document.getElementById("out2").innerHTML = ans; 
+		 	 	 }
+			  }
+		 }	
+	 }	
+}
+function cotf()
+{
+	 temp = 4;
+	 dup = dup.concat("cot ");
+	 document.getElementById("out1").innerHTML = dup;
+	 return;	 
+}
+function secf()
+{
+	 temp = 5;
+	 dup = dup.concat("sec ");
+	 document.getElementById("out1").innerHTML = dup;
+	 return;	 
+}
+function clear()
+{
+	dup = "";
+					document.getElementById("out1").innerHTML = dup;
+					document.getElementById("out2").innerHTML = "Answer";
+					p = dup;					
+					return;
+}
+function cosecf()
+{
+	 temp = 6;
+	 dup = dup.concat("cosec ");
+	 document.getElementById("out1").innerHTML = dup;
+	 return;	 
+}
+function fun(k)
+{
+	if(k == "AC")
+	{
+		  clear();
+	}
+	else if(k == "=")
+	{
+		 if(temp == 1)
+						  {
+						  		//track = track.concat("1");
+						  		p = p.concat(Math.sin(Number(change(Number(num)))).toFixed(6)+" ");
+						  		ans = eval(p);
+						  		document.getElementById("out2").innerHTML = ans;
+						  		temp = 0;
+						  		num = "";
+						  		return;
+						  }
+						  else if(temp == 2)
+						  {
+						  		//track = track.concat("2");
+								p = p.concat(Math.cos(Number(change(Number(num)))).toFixed(6)+" ");
+						  		ans = eval(p);
+						  		document.getElementById("out2").innerHTML = ans;
+						  		temp = 0;
+						  		num = "";
+						  		return;
+						  }
+						  else if(temp == 3)
+						  {
+						  		//track = track.concat("3");
+						  			p = p.concat(Math.tan(Number(change(Number(num)))).toFixed(6)+" ");
+						  		ans = eval(p);
+						  		document.getElementById("out2").innerHTML = ans;
+						  		temp = 0;
+						  		num = "";
+						  		return;
+						  }
+						  else if(temp == 4)
+						  {
+						  		//track = track.concat("4");
+						  			p = p.concat((1/Math.tan(Number(change(Number(num))))).toFixed(6)+" ");
+						  		ans = eval(p);
+						  		document.getElementById("out2").innerHTML = ans;
+						  		temp = 0;
+						  		num = "";
+						  		return;
+						  }
+						  else if(temp == 5)
+						  {
+						  		//track = track.concat("5");
+						  			p = p.concat((1/Math.cos(Number(change(Number(num))))).toFixed(6)+" ");
+						  		alert(ans);
+						  		document.getElementById("out2").innerHTML = ans;
+						  		temp = 0;
+						  		num = "";
+						  		return;
+						  }
+						  else if(temp == 6)
+						  {
+						  		//track = track.concat("6");
+						  			p = p.concat((1/Math.sin(Number(change(Number(num))))).toFixed(6)+" ");
+						  		ans = eval(p);
+						  		document.getElementById("out2").innerHTML = ans;
+						  		temp = 0;
+						  		num = "";
+						  		return;
+						  }
+						  else 
+						 	  return;
+	}
+	else if(k == "+" || k == "-" || k == "*" || k == "/" || k == "**" || k == "%")
+	{
+		   if(temp == 1)
+						  {
+						  		p = p.concat(Math.sin(Number(change(Number(num)))).toFixed(6)+" ");
+						  		ans = eval(p);
+						  		document.getElementById("out2").innerHTML = ans;
+						  		dup = dup.concat(k);
+								document.getElementById("out1").innerHTML = dup;
+								p = p.concat(k);
+						  		temp = 0;
+						  		num = "";
+						  }
+						  else if(temp == 2)
+						  {
+						  			p = p.concat(Math.cos(Number(change(Number(num)))).toFixed(6)+" ");
+						  		ans = eval(p);
+						  		document.getElementById("out2").innerHTML = ans;
+						  		dup = dup.concat(k);
+								document.getElementById("out1").innerHTML = dup;
+								p = p.concat(k);
+						  		temp = 0;
+						  		num = "";
+						  }
+						  else if(temp == 3)
+						  {
+						  			p = p.concat(Math.tan(Number(change(Number(num)))).toFixed(6)+" ");
+						  		ans = eval(p);
+						  		document.getElementById("out2").innerHTML = ans;
+						  		dup = dup.concat(k);
+								document.getElementById("out1").innerHTML = dup;
+								p = p.concat(k);
+						  		temp = 0;
+						  		num = "";
+						  }
+						  else if(temp == 4)
+						  {
+						  			p = p.concat((1/Math.tan(Number(change(Number(num))))).toFixed(6)+" ");
+						  		ans = eval(p);
+						  		document.getElementById("out2").innerHTML = ans;
+						  		dup = dup.concat(k);
+								document.getElementById("out1").innerHTML = dup;
+								p = p.concat(k);
+						  		temp = 0;
+						  		num = "";
+						  }
+						  else if(temp == 5)
+						  {
+						  			p = p.concat((1/Math.cos(Number(change(Number(num))))).toFixed(6)+" ");
+						  		ans = eval(p);
+						  		document.getElementById("out2").innerHTML = ans;
+						  		dup = dup.concat(k);
+								document.getElementById("out1").innerHTML = dup;
+								p = p.concat(k);
+						  		temp = 0;
+						  		num = "";
+						  }
+						  else if(temp == 6)
+						  {
+						  			p = p.concat((1/Math.sin(Number(change(Number(num))))).toFixed(6)+" ");
+						  		ans = eval(p);
+						  		document.getElementById("out2").innerHTML = ans;
+						  		dup = dup.concat(k);
+								document.getElementById("out1").innerHTML = dup;
+								p = p.concat(k);
+						  		temp = 0;
+						  		num = "";
+						  }
+						  else
+						  {
+						  		dup = dup.concat(k);
+								document.getElementById("out1").innerHTML = dup;
+								p = p.concat(k);
+						  }
+						  return;
+	}
+	else
+	{
+			if(temp == 1 || temp == 2 || temp == 3 || temp == 4 || temp == 5 || temp == 6)
+	{
+		 	 num = num.concat(k);
+				dup = dup.concat(k);
+				document.getElementById("out1").innerHTML = dup;
+			   	   	   return;	
+	}
+   	else
+	   {
+	   		dup = dup.concat(k);
+	 document.getElementById("out1").innerHTML = dup;
+	 p = p.concat(k);
+	 ans = eval(p);
+	 document.getElementById("out2").innerHTML = ans;
+	   } 
+	}
+}
+</script>
+</body>
+</html>
